@@ -2,7 +2,7 @@ name = "gleam_toon"
 version = "0.1.0"
 description = "TOON (Token-Oriented Object Notation) encoder/decoder - a compact, token-efficient format for LLM input"
 licences = ["MIT"]
-repository = { type = "github", user = "axelbellec", repo = "toon" }
+repository = { type = "github", user = "axelbellec", repo = "gleam_toon" }
 links = [
   { title = "Specification", href = "https://github.com/byjohann/toon/blob/main/SPEC.md" },
 ]
