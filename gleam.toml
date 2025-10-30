@@ -1,0 +1,14 @@
+name = "gleam_toon"
+version = "0.1.0"
+description = "TOON (Token-Oriented Object Notation) encoder/decoder - a compact, token-efficient format for LLM input"
+licences = ["MIT"]
+repository = { type = "github", user = "axelbellec", repo = "toon" }
+links = [
+  { title = "Specification", href = "https://github.com/byjohann/toon/blob/main/SPEC.md" },
+]
+
+[dependencies]
+gleam_stdlib = ">= 0.44.0 and < 2.0.0"
+
+[dev-dependencies]
+gleeunit = ">= 1.0.0 and < 2.0.0"
