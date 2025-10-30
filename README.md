@@ -28,7 +28,22 @@ TOON is a serialization format optimized for LLM consumption that achieves signi
 Add `toon_codec` to your Gleam project:
 
 ```sh
-gleam add toon_codec
+gleam add toon_codec@1
+```
+
+This will add the latest v1.x version to your project's dependencies in `gleam.toml`.
+
+Alternatively, you can manually add it to your `gleam.toml`:
+
+```toml
+[dependencies]
+toon_codec = ">= 1.0.0 and < 2.0.0"
+```
+
+Then run:
+
+```sh
+gleam deps download
 ```
 
 ## Quick Start
