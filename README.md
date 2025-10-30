@@ -313,6 +313,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## Related Projects
+
+- **[toon_ex](https://github.com/kentaro/toon_ex)** - An Elixir implementation of TOON. Since both Gleam and Elixir run on the BEAM VM, you can use either library depending on your language preference or integrate both in mixed Gleam/Elixir projects.
+- **[Other TOON Ports](https://github.com/johannschopplich/toon?tab=readme-ov-file#ports-in-other-languages)** - See the official TOON repository for implementations in Python, Rust, and other languages.
+
 ## Acknowledgments
 
 - **Johann Schopplich** for creating the original TOON format and specification
