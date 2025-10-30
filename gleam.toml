@@ -4,7 +4,7 @@ description = "TOON (Token-Oriented Object Notation) encoder/decoder - a compact
 licences = ["MIT"]
 repository = { type = "github", user = "axelbellec", repo = "toon_codec" }
 links = [
-  { title = "Specification", href = "https://github.com/byjohann/toon/blob/main/SPEC.md" },
+  { title = "TOON Specification", href = "https://github.com/johannschopplich/toon/blob/main/SPEC.md" },
 ]
 
 [dependencies]
