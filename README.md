@@ -9,8 +9,7 @@ A Gleam implementation of TOON (Token-Oriented Object Notation) - a compact, hum
 
 ## Origin
 
-toon*codec is a Gleam port of the original TOON format created by \_Johann Schopplich* →
-https://github.com/johannschopplich/toon/tree/main
+**`toon_codec`** is a Gleam port of the original TOON format created by [_Johann Schopplich_](https://github.com/johannschopplich/toon/tree/main).
 
 ## About TOON
 
@@ -214,25 +213,13 @@ let result = toon_codec.decode_with_options(encoded, decode_opts)
 
 ### Core Functions
 
-- **`encode(value: JsonValue) -> String`**
+- [`encode(value: JsonValue) -> String`](https://hexdocs.pm/toon_codec/toon_codec/encode.html)  
   Encode a JSON value to TOON format with default options.
 
-- **`encode_with_options(value: JsonValue, options: EncodeOptions) -> String`**
-  Encode with custom indentation, delimiter, and length marker options.
+- [`decode(input: String) -> Result(JsonValue, ToonError)`](https://hexdocs.pm/toon_codec/toon_codec/decode.html)  
+  Decode TOON format to JSON value with default options
 
-- **`decode(input: String) -> Result(JsonValue, ToonError)`**
-  Decode TOON format to JSON value with default options.
-
-- **`decode_with_options(input: String, options: DecodeOptions) -> Result(JsonValue, ToonError)`**
-  Decode with custom indentation and strict mode settings.
-
-### Types
-
-- **`JsonValue`**: `Null | Bool(Bool) | Number(Float) | String(String) | Array(List(JsonValue)) | Object(List(#(String, JsonValue)))`
-- **`EncodeOptions`**: `EncodeOptions(indent: Int, delimiter: Delimiter, length_marker: LengthMarker)`
-- **`DecodeOptions`**: `DecodeOptions(indent: Int, strict: Bool)`
-- **`Delimiter`**: `Comma | Tab | Pipe`
-- **`LengthMarker`**: `NoMarker | HashMarker`
+See types [here](https://hexdocs.pm/toon_codec/toon_codec/types.html).
 
 ## TOON Format Examples
 
@@ -263,7 +250,7 @@ total: 2
 
 ## Testing
 
-toon_codec includes a comprehensive test suite with **113 tests** covering:
+**`toon_codec`** includes a comprehensive test suite with **113 tests** covering:
 
 - Primitive type encoding/decoding
 - Object encoding/decoding with nesting
@@ -281,9 +268,9 @@ gleam test
 
 ## Specification
 
-toon_codec implements the **TOON Specification v1.2**. For complete format details, see:
+**`toon_codec`** implements the **TOON Specification v1.2**. For complete format details, see:
 
-- [TOON Specification](https://github.com/byjohann/toon/blob/main/SPEC.md)
+- [TOON Specification](https://github.com/johannschopplich/toon/blob/main/SPEC.md)
 
 ## Development
 
