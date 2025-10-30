@@ -29,8 +29,8 @@ import gleam/int
 import gleam/list
 import gleam/option.{type Option}
 import gleam/string
-import gleam_toon/error.{type ToonError}
-import gleam_toon/types.{type ParsedLine}
+import toon_codec/error.{type ToonError}
+import toon_codec/types.{type ParsedLine}
 
 // Line scanning
 

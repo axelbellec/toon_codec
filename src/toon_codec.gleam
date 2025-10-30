@@ -9,7 +9,7 @@
 //// ## Quick Start
 ////
 //// ```gleam
-//// import gleam_toon.{type JsonValue, Object, String, Number}
+//// import toon_codec.{type JsonValue, Object, String, Number}
 ////
 //// pub fn main() {
 ////   // Create a JSON value
@@ -20,11 +20,11 @@
 ////   ])
 ////
 ////   // Encode to TOON
-////   let toon_str = gleam_toon.encode(user)
+////   let toon_str = toon_codec.encode(user)
 ////   // Result: "name: Alice\nage: 30\nactive: true"
 ////
 ////   // Decode back to JSON
-////   case gleam_toon.decode(toon_str) {
+////   case toon_codec.decode(toon_str) {
 ////     Ok(decoded) -> // Process the decoded value
 ////     Error(err) -> // Handle the error
 ////   }
@@ -34,7 +34,7 @@
 //// ## Custom Options
 ////
 //// ```gleam
-//// import gleam_toon.{EncodeOptions, Tab}
+//// import toon_codec.{EncodeOptions, Tab}
 ////
 //// let options = EncodeOptions(
 ////   indent: 4,
@@ -42,7 +42,7 @@
 ////   length_marker: HashMarker,
 //// )
 ////
-//// let toon = gleam_toon.encode_with_options(value, options)
+//// let toon = toon_codec.encode_with_options(value, options)
 //// ```
 //// Encode a JSON value to TOON format with default options.
 ////
@@ -105,8 +105,8 @@
 //// - indent: 2
 //// - strict: True
 
-import gleam_toon/decode
-import gleam_toon/encode
+import toon_codec/decode
+import toon_codec/encode
 
 // Re-export all public types and constructors
 pub type JsonValue =
@@ -128,8 +128,8 @@ pub type LengthMarker =
   types.LengthMarker
 
 // Import just types and error type for re-export
-import gleam_toon/error
-import gleam_toon/types
+import toon_codec/error
+import toon_codec/types
 
 // Encoding
 

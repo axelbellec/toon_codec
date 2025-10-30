@@ -67,11 +67,11 @@
 
 import gleam/list
 import gleam/option.{type Option, None, Some}
-import gleam_toon/constants
-import gleam_toon/encode/internal
-import gleam_toon/encode/primitives
-import gleam_toon/encode/writer.{type Writer}
-import gleam_toon/types.{
+import toon_codec/constants
+import toon_codec/encode/internal
+import toon_codec/encode/primitives
+import toon_codec/encode/writer.{type Writer}
+import toon_codec/types.{
   type EncodeOptions, type JsonValue, Array, Object, String as JsonString,
 }
 

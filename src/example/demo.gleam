@@ -1,7 +1,7 @@
 import gleam/io
 import gleam/string
-import gleam_toon
-import gleam_toon/types.{
+import toon_codec
+import toon_codec/types.{
   Array, Bool, Comma, EncodeOptions, HashMarker, NoMarker, Number, Object, Pipe,
   String, Tab,
 }
@@ -49,7 +49,7 @@ fn demo_simple_user() {
       #("role", String("admin")),
     ])
 
-  let encoded = gleam_toon.encode(user)
+  let encoded = toon_codec.encode(user)
   io.println("Encoded:")
   io.println(encoded)
 }
@@ -73,7 +73,7 @@ fn demo_nested_objects() {
       ),
     ])
 
-  let encoded = gleam_toon.encode(person)
+  let encoded = toon_codec.encode(person)
   io.println("Encoded:")
   io.println(encoded)
 }
@@ -81,7 +81,7 @@ fn demo_nested_objects() {
 fn demo_inline_array() {
   let numbers = Array([Number(1.0), Number(2.0), Number(3.0), Number(4.0)])
 
-  let encoded = gleam_toon.encode(numbers)
+  let encoded = toon_codec.encode(numbers)
   io.println("Encoded:")
   io.println(encoded)
 }
@@ -106,7 +106,7 @@ fn demo_tabular_array() {
       ]),
     ])
 
-  let encoded = gleam_toon.encode(users)
+  let encoded = toon_codec.encode(users)
   io.println("Encoded:")
   io.println(encoded)
 }
@@ -121,7 +121,7 @@ fn demo_expanded_array() {
       Array([String("nested"), String("array")]),
     ])
 
-  let encoded = gleam_toon.encode(mixed)
+  let encoded = toon_codec.encode(mixed)
   io.println("Encoded:")
   io.println(encoded)
 }
@@ -132,14 +132,14 @@ fn demo_custom_delimiter() {
   let options =
     EncodeOptions(indent: 2, delimiter: Tab, length_marker: NoMarker)
 
-  let encoded = gleam_toon.encode_with_options(data, options)
+  let encoded = toon_codec.encode_with_options(data, options)
   io.println("Encoded with Tab delimiter:")
   io.println(encoded)
 
   let options_pipe =
     EncodeOptions(indent: 2, delimiter: Pipe, length_marker: NoMarker)
 
-  let encoded_pipe = gleam_toon.encode_with_options(data, options_pipe)
+  let encoded_pipe = toon_codec.encode_with_options(data, options_pipe)
   io.println("\nEncoded with Pipe delimiter:")
   io.println(encoded_pipe)
 }
@@ -160,7 +160,7 @@ fn demo_custom_options() {
   let encode_options =
     EncodeOptions(indent: 4, delimiter: Comma, length_marker: HashMarker)
 
-  let encoded = gleam_toon.encode_with_options(data, encode_options)
+  let encoded = toon_codec.encode_with_options(data, encode_options)
   io.println("Encoded with 4-space indent and hash markers:")
   io.println(encoded)
 }
@@ -177,11 +177,11 @@ fn demo_roundtrip() {
   io.println("Original:")
   io.println(string.inspect(original))
 
-  let encoded = gleam_toon.encode(original)
+  let encoded = toon_codec.encode(original)
   io.println("\nEncoded to TOON:")
   io.println(encoded)
 
-  case gleam_toon.decode(encoded) {
+  case toon_codec.decode(encoded) {
     Ok(decoded) -> {
       io.println("\nDecoded back to JsonValue:")
       io.println(string.inspect(decoded))

@@ -13,7 +13,7 @@
 //// Check if a character is a newline (\n or \r).
 
 import gleam/string
-import gleam_toon/constants
+import toon_codec/constants
 
 // Character classification
 

@@ -87,9 +87,9 @@ import gleam/int
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/string
-import gleam_toon/constants
-import gleam_toon/internal/string as string_utils
-import gleam_toon/types.{
+import toon_codec/constants
+import toon_codec/internal/string as string_utils
+import toon_codec/types.{
   type Delimiter, type JsonValue, type LengthMarker, Bool, HashMarker, NoMarker,
   Null, Number, String as JsonString,
 }

@@ -56,9 +56,9 @@
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/string
-import gleam_toon/error.{type ToonError}
-import gleam_toon/internal/char
-import gleam_toon/types.{type Delimiter}
+import toon_codec/error.{type ToonError}
+import toon_codec/internal/char
+import toon_codec/types.{type Delimiter}
 
 // Escaping
 

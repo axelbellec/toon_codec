@@ -1,13 +1,13 @@
-import gleam_toon
-import gleam_toon/types.{Array, Object, String}
 import gleeunit/should
+import toon_codec
+import toon_codec/types.{Array, Object, String}
 
 // Strict mode: count validation
 pub fn strict_mode_validates_array_count_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "[3]: 1,2,3"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_ok
   |> should.equal(Array([String("1"), String("2"), String("3")]))
 }
@@ -16,7 +16,7 @@ pub fn strict_mode_rejects_incorrect_array_count_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "[3]: 1,2"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_error
 }
 
@@ -24,7 +24,7 @@ pub fn strict_mode_validates_tabular_count_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "[2]{name,age}:\n  Alice,30\n  Bob,25"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_ok
   |> should.equal(
     Array([
@@ -38,7 +38,7 @@ pub fn strict_mode_rejects_incorrect_tabular_count_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "[2]{name,age}:\n  Alice,30\n  Bob,25\n  Charlie,35"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_error
 }
 
@@ -46,7 +46,7 @@ pub fn strict_mode_rejects_tabular_too_few_rows_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "[3]{name,age}:\n  Alice,30\n  Bob,25"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_error
 }
 
@@ -55,7 +55,7 @@ pub fn strict_mode_validates_consistent_indentation_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "outer:\n  inner1: value1\n  inner2: value2"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_ok
   |> should.equal(
     Object([
@@ -71,7 +71,7 @@ pub fn strict_mode_rejects_inconsistent_indentation_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "outer:\n  inner1: value1\n   inner2: value2"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_error
 }
 
@@ -79,7 +79,7 @@ pub fn strict_mode_rejects_wrong_indentation_level_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "outer:\n inner: value"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_error
 }
 
@@ -88,7 +88,7 @@ pub fn strict_mode_validates_consistent_row_width_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "[2]{name,age,city}:\n  Alice,30,NYC\n  Bob,25,LA"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_ok
 }
 
@@ -96,7 +96,7 @@ pub fn strict_mode_rejects_inconsistent_row_width_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "[2]{name,age}:\n  Alice,30\n  Bob,25,extra"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_error
 }
 
@@ -104,7 +104,7 @@ pub fn strict_mode_rejects_row_too_short_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
   let input = "[1]{name,age,city}:\n  Alice,30"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_error
 }
 
@@ -113,7 +113,7 @@ pub fn non_strict_mode_allows_missing_count_test() {
   let opts = types.DecodeOptions(indent: 2, strict: False)
   let input = "[2]{name,age}:\n  Alice,30\n  Bob,25"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_ok
   |> should.equal(
     Array([
@@ -146,7 +146,7 @@ pub fn strict_mode_rejects_complex_structure_bad_indent_test() {
     <> "  - name: Bob\n"
     <> "     age: 25"
 
-  gleam_toon.decode_with_options(input, opts)
+  toon_codec.decode_with_options(input, opts)
   |> should.be_error
 }
 
@@ -158,7 +158,7 @@ pub fn default_decode_uses_strict_true_test() {
   let input = "[2]{name,age}:\n  Alice,30\n  Bob,25"
 
   // Default decode should work with correct data
-  gleam_toon.decode(input)
+  toon_codec.decode(input)
   |> should.be_ok
 }
 
@@ -166,7 +166,7 @@ pub fn default_decode_uses_strict_true_test() {
 pub fn strict_mode_validates_empty_array_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
 
-  gleam_toon.decode_with_options("[0]:", opts)
+  toon_codec.decode_with_options("[0]:", opts)
   |> should.be_ok
   |> should.equal(Array([]))
 }
@@ -174,7 +174,7 @@ pub fn strict_mode_validates_empty_array_test() {
 pub fn strict_mode_validates_single_primitive_test() {
   let opts = types.DecodeOptions(indent: 2, strict: True)
 
-  gleam_toon.decode_with_options("42", opts)
+  toon_codec.decode_with_options("42", opts)
   |> should.be_ok
   |> should.equal(String("42"))
 }

@@ -34,10 +34,10 @@ import gleam/int
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/string
-import gleam_toon/error.{type ToonError}
-import gleam_toon/internal/char
-import gleam_toon/internal/string as string_utils
-import gleam_toon/types.{
+import toon_codec/error.{type ToonError}
+import toon_codec/internal/char
+import toon_codec/internal/string as string_utils
+import toon_codec/types.{
   type ArrayHeader, type Delimiter, type JsonValue, ArrayHeader, Bool, Comma,
   Null, Number, Pipe, String as JsonString, Tab,
 }

@@ -9,7 +9,7 @@
 //// Validate that indentation is a multiple of indent_size.
 
 import gleam/int
-import gleam_toon/error.{type ToonError}
+import toon_codec/error.{type ToonError}
 
 // Count validation
 

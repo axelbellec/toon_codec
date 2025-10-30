@@ -51,7 +51,7 @@
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/set
-import gleam_toon/types.{
+import toon_codec/types.{
   type JsonValue, Array, Bool, Null, Number, Object, String as JsonString,
 }
 

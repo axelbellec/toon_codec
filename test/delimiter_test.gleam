@@ -1,15 +1,15 @@
-import gleam_toon
-import gleam_toon/types.{
+import gleeunit/should
+import toon_codec
+import toon_codec/types.{
   Array, Comma, NoMarker, Number, Object, Pipe, String, Tab,
 }
-import gleeunit/should
 
 // Comma delimiter (default) - Format: [count]: val1,val2,val3
 pub fn encode_inline_array_with_comma_test() {
   let opts =
     types.EncodeOptions(indent: 2, delimiter: Comma, length_marker: NoMarker)
 
-  gleam_toon.encode_with_options(
+  toon_codec.encode_with_options(
     Array([Number(1.0), Number(2.0), Number(3.0)]),
     opts,
   )
@@ -17,7 +17,7 @@ pub fn encode_inline_array_with_comma_test() {
 }
 
 pub fn decode_inline_array_with_comma_test() {
-  gleam_toon.decode("[3]: 1,2,3")
+  toon_codec.decode("[3]: 1,2,3")
   |> should.be_ok
   |> should.equal(Array([String("1"), String("2"), String("3")]))
 }
@@ -31,14 +31,14 @@ pub fn encode_tabular_with_comma_test() {
       Object([#("name", String("Bob")), #("age", Number(25.0))]),
     ])
 
-  gleam_toon.encode_with_options(arr, opts)
+  toon_codec.encode_with_options(arr, opts)
   |> should.equal("[2]{name,age}:\n  Alice,30\n  Bob,25")
 }
 
 pub fn decode_tabular_with_comma_test() {
   let input = "[2]{name,age}:\n  Alice,30\n  Bob,25"
 
-  gleam_toon.decode(input)
+  toon_codec.decode(input)
   |> should.be_ok
   |> should.equal(
     Array([
@@ -54,7 +54,7 @@ pub fn encode_inline_array_with_tab_test() {
   let opts =
     types.EncodeOptions(indent: 2, delimiter: Tab, length_marker: NoMarker)
 
-  gleam_toon.encode_with_options(
+  toon_codec.encode_with_options(
     Array([Number(1.0), Number(2.0), Number(3.0)]),
     opts,
   )
@@ -62,7 +62,7 @@ pub fn encode_inline_array_with_tab_test() {
 }
 
 pub fn decode_inline_array_with_tab_test() {
-  gleam_toon.decode("[3\t]: 1\t2\t3")
+  toon_codec.decode("[3\t]: 1\t2\t3")
   |> should.be_ok
   |> should.equal(Array([String("1"), String("2"), String("3")]))
 }
@@ -76,14 +76,14 @@ pub fn encode_tabular_with_tab_test() {
       Object([#("name", String("Bob")), #("age", Number(25.0))]),
     ])
 
-  gleam_toon.encode_with_options(arr, opts)
+  toon_codec.encode_with_options(arr, opts)
   |> should.equal("[2\t]{name\tage}:\n  Alice\t30\n  Bob\t25")
 }
 
 pub fn decode_tabular_with_tab_test() {
   let input = "[2\t]{name\tage}:\n  Alice\t30\n  Bob\t25"
 
-  gleam_toon.decode(input)
+  toon_codec.decode(input)
   |> should.be_ok
   |> should.equal(
     Array([
@@ -98,7 +98,7 @@ pub fn encode_inline_array_with_pipe_test() {
   let opts =
     types.EncodeOptions(indent: 2, delimiter: Pipe, length_marker: NoMarker)
 
-  gleam_toon.encode_with_options(
+  toon_codec.encode_with_options(
     Array([Number(1.0), Number(2.0), Number(3.0)]),
     opts,
   )
@@ -106,7 +106,7 @@ pub fn encode_inline_array_with_pipe_test() {
 }
 
 pub fn decode_inline_array_with_pipe_test() {
-  gleam_toon.decode("[3|]: 1|2|3")
+  toon_codec.decode("[3|]: 1|2|3")
   |> should.be_ok
   |> should.equal(Array([String("1"), String("2"), String("3")]))
 }
@@ -120,14 +120,14 @@ pub fn encode_tabular_with_pipe_test() {
       Object([#("name", String("Bob")), #("age", Number(25.0))]),
     ])
 
-  gleam_toon.encode_with_options(arr, opts)
+  toon_codec.encode_with_options(arr, opts)
   |> should.equal("[2|]{name|age}:\n  Alice|30\n  Bob|25")
 }
 
 pub fn decode_tabular_with_pipe_test() {
   let input = "[2|]{name|age}:\n  Alice|30\n  Bob|25"
 
-  gleam_toon.decode(input)
+  toon_codec.decode(input)
   |> should.be_ok
   |> should.equal(
     Array([
@@ -142,7 +142,7 @@ pub fn encode_comma_with_comma_in_value_test() {
   let opts =
     types.EncodeOptions(indent: 2, delimiter: Comma, length_marker: NoMarker)
 
-  gleam_toon.encode_with_options(
+  toon_codec.encode_with_options(
     Array([String("hello, world"), String("foo")]),
     opts,
   )
@@ -150,7 +150,7 @@ pub fn encode_comma_with_comma_in_value_test() {
 }
 
 pub fn decode_comma_with_comma_in_value_test() {
-  gleam_toon.decode("[2]: \"hello, world\",foo")
+  toon_codec.decode("[2]: \"hello, world\",foo")
   |> should.be_ok
   |> should.equal(Array([String("hello, world"), String("foo")]))
 }
@@ -159,7 +159,7 @@ pub fn encode_tab_with_tab_in_value_test() {
   let opts =
     types.EncodeOptions(indent: 2, delimiter: Tab, length_marker: NoMarker)
 
-  gleam_toon.encode_with_options(
+  toon_codec.encode_with_options(
     Array([String("hello\tworld"), String("foo")]),
     opts,
   )
@@ -167,7 +167,7 @@ pub fn encode_tab_with_tab_in_value_test() {
 }
 
 pub fn decode_tab_with_tab_in_value_test() {
-  gleam_toon.decode("[2\t]: \"hello\\tworld\"\tfoo")
+  toon_codec.decode("[2\t]: \"hello\\tworld\"\tfoo")
   |> should.be_ok
   |> should.equal(Array([String("hello\tworld"), String("foo")]))
 }
@@ -176,7 +176,7 @@ pub fn encode_pipe_with_pipe_in_value_test() {
   let opts =
     types.EncodeOptions(indent: 2, delimiter: Pipe, length_marker: NoMarker)
 
-  gleam_toon.encode_with_options(
+  toon_codec.encode_with_options(
     Array([String("hello|world"), String("foo")]),
     opts,
   )
@@ -186,7 +186,7 @@ pub fn encode_pipe_with_pipe_in_value_test() {
 // Note: Decoder has issues with quoted strings in pipe-delimited arrays
 // Commenting out until decoder is fixed
 // pub fn decode_pipe_with_pipe_in_value_test() {
-//   gleam_toon.decode("[2|]: \"hello|world\"|foo")
+//   toon_codec.decode("[2|]: \"hello|world\"|foo")
 //   |> should.be_ok
 //   |> should.equal(Array([String("hello|world"), String("foo")]))
 // }
@@ -200,7 +200,7 @@ pub fn encode_nested_object_with_custom_indent_test() {
       #("outer", Object([#("inner", String("value"))])),
     ])
 
-  gleam_toon.encode_with_options(obj, opts)
+  toon_codec.encode_with_options(obj, opts)
   |> should.equal("outer:\n    inner: value")
 }
 
@@ -215,6 +215,6 @@ pub fn encode_nested_array_with_custom_indent_test() {
     ])
 
   // Tabular format: [N]{fields}: then rows with custom indent (3 spaces)
-  gleam_toon.encode_with_options(arr, opts)
+  toon_codec.encode_with_options(arr, opts)
   |> should.equal("[1]{key}:\n   value")
 }

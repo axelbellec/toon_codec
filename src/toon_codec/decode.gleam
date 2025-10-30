@@ -33,12 +33,12 @@
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/string
-import gleam_toon/constants
-import gleam_toon/decode/parser
-import gleam_toon/decode/scanner.{type LineCursor}
-import gleam_toon/decode/validation
-import gleam_toon/error.{type ToonError}
-import gleam_toon/types.{
+import toon_codec/constants
+import toon_codec/decode/parser
+import toon_codec/decode/scanner.{type LineCursor}
+import toon_codec/decode/validation
+import toon_codec/error.{type ToonError}
+import toon_codec/types.{
   type ArrayHeader, type DecodeOptions, type JsonValue, type ParsedLine,
   type RootForm, Array, Object, RootArray, RootObject, RootPrimitive,
 }

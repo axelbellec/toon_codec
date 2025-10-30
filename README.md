@@ -1,7 +1,7 @@
-# gleam_toon
+# toon_codec
 
-[![Package Version](https://img.shields.io/hexpm/v/gleam_toon)](https://hex.pm/packages/gleam_toon)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/gleam_toon/)
+[![Package Version](https://img.shields.io/hexpm/v/toon_codec)](https://hex.pm/packages/toon_codec)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/toon_codec/)
 ![Tests](https://img.shields.io/badge/tests-113%20passing-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
@@ -9,7 +9,7 @@ A Gleam implementation of TOON (Token-Oriented Object Notation) - a compact, hum
 
 ## Origin
 
-gleam_toon is a Gleam port of the original TOON format created by _Johann Schopplich_ →
+toon*codec is a Gleam port of the original TOON format created by \_Johann Schopplich* →
 https://github.com/johannschopplich/toon/tree/main
 
 ## About TOON
@@ -26,17 +26,17 @@ TOON is a serialization format optimized for LLM consumption that achieves signi
 
 ## Installation
 
-Add `gleam_toon` to your Gleam project:
+Add `toon_codec` to your Gleam project:
 
 ```sh
-gleam add gleam_toon
+gleam add toon_codec
 ```
 
 ## Quick Start
 
 ```gleam
-import gleam_toon
-import gleam_toon/types.{Array, Bool, Number, Object, String}
+import toon_codec
+import toon_codec/types.{Array, Bool, Number, Object, String}
 
 pub fn main() {
   // Create a data structure
@@ -48,7 +48,7 @@ pub fn main() {
   ])
 
   // Encode to TOON format
-  let toon_str = gleam_toon.encode(user)
+  let toon_str = toon_codec.encode(user)
   // Result:
   // name: Alice
   // age: 30
@@ -56,7 +56,7 @@ pub fn main() {
   // tags[2]: admin,developer
 
   // Decode back to JsonValue
-  case gleam_toon.decode(toon_str) {
+  case toon_codec.decode(toon_str) {
     Ok(decoded) -> io.println("Successfully decoded!")
     Error(err) -> io.println("Error: " <> string.inspect(err))
   }
@@ -87,30 +87,30 @@ gleam run -m example/demo
 ### Primitives
 
 ```gleam
-import gleam_toon
-import gleam_toon/types.{Bool, Null, Number, String}
+import toon_codec
+import toon_codec/types.{Bool, Null, Number, String}
 
 // Strings
-gleam_toon.encode(String("hello"))
+toon_codec.encode(String("hello"))
 // -> "hello"
 
 // Numbers
-gleam_toon.encode(Number(42.5))
+toon_codec.encode(Number(42.5))
 // -> "42.5"
 
 // Booleans
-gleam_toon.encode(Bool(True))
+toon_codec.encode(Bool(True))
 // -> "true"
 
 // Null
-gleam_toon.encode(Null)
+toon_codec.encode(Null)
 // -> "null"
 ```
 
 ### Objects
 
 ```gleam
-import gleam_toon/types.{Number, Object, String}
+import toon_codec/types.{Number, Object, String}
 
 // Simple object
 let user = Object([
@@ -118,7 +118,7 @@ let user = Object([
   #("age", Number(30.0)),
 ])
 
-gleam_toon.encode(user)
+toon_codec.encode(user)
 // -> "name: Alice\nage: 30"
 
 // Nested object
@@ -130,7 +130,7 @@ let person = Object([
   ])),
 ])
 
-gleam_toon.encode(person)
+toon_codec.encode(person)
 // -> "name: Bob\naddress:\n  city: NYC\n  zip: \"10001\""
 ```
 
@@ -139,31 +139,31 @@ gleam_toon.encode(person)
 #### Inline Arrays (Primitives)
 
 ```gleam
-import gleam_toon/types.{Array, Number}
+import toon_codec/types.{Array, Number}
 
 let numbers = Array([Number(1.0), Number(2.0), Number(3.0)])
-gleam_toon.encode(numbers)
+toon_codec.encode(numbers)
 // -> "[3]: 1,2,3"
 ```
 
 #### Tabular Arrays (Objects with Same Keys)
 
 ```gleam
-import gleam_toon/types.{Array, Number, Object, String}
+import toon_codec/types.{Array, Number, Object, String}
 
 let users = Array([
   Object([#("name", String("Alice")), #("age", Number(30.0))]),
   Object([#("name", String("Bob")), #("age", Number(25.0))]),
 ])
 
-gleam_toon.encode(users)
+toon_codec.encode(users)
 // -> "[2]{name,age}:\n  Alice,30\n  Bob,25"
 ```
 
 #### Expanded Arrays (Mixed Types)
 
 ```gleam
-import gleam_toon/types.{Array, Number, Object, String}
+import toon_codec/types.{Array, Number, Object, String}
 
 let mixed = Array([
   String("item1"),
@@ -171,27 +171,27 @@ let mixed = Array([
   Object([#("key", String("value"))]),
 ])
 
-gleam_toon.encode(mixed)
+toon_codec.encode(mixed)
 // -> "[3]:\n  - item1\n  - 42\n  - key: value"
 ```
 
 ### Custom Delimiters
 
 ```gleam
-import gleam_toon
-import gleam_toon/types.{Array, EncodeOptions, Number, Tab}
+import toon_codec
+import toon_codec/types.{Array, EncodeOptions, Number, Tab}
 
 let numbers = Array([Number(1.0), Number(2.0), Number(3.0)])
 let options = EncodeOptions(indent: 2, delimiter: Tab, length_marker: types.NoMarker)
 
-gleam_toon.encode_with_options(numbers, options)
+toon_codec.encode_with_options(numbers, options)
 // -> "[3\t]: 1\t2\t3"
 ```
 
 ### Custom Options
 
 ```gleam
-import gleam_toon/types.{Comma, DecodeOptions, EncodeOptions, HashMarker}
+import toon_codec/types.{Comma, DecodeOptions, EncodeOptions, HashMarker}
 
 // Encoding options
 let encode_opts = EncodeOptions(
@@ -206,8 +206,8 @@ let decode_opts = DecodeOptions(
   strict: True,   // Validate array counts and indentation
 )
 
-let encoded = gleam_toon.encode_with_options(value, encode_opts)
-let result = gleam_toon.decode_with_options(encoded, decode_opts)
+let encoded = toon_codec.encode_with_options(value, encode_opts)
+let result = toon_codec.decode_with_options(encoded, decode_opts)
 ```
 
 ## API Reference
@@ -263,7 +263,7 @@ total: 2
 
 ## Testing
 
-gleam_toon includes a comprehensive test suite with **113 tests** covering:
+toon_codec includes a comprehensive test suite with **113 tests** covering:
 
 - Primitive type encoding/decoding
 - Object encoding/decoding with nesting
@@ -281,7 +281,7 @@ gleam test
 
 ## Specification
 
-gleam_toon implements the **TOON Specification v1.2**. For complete format details, see:
+toon_codec implements the **TOON Specification v1.2**. For complete format details, see:
 
 - [TOON Specification](https://github.com/byjohann/toon/blob/main/SPEC.md)
 

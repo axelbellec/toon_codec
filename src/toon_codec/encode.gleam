@@ -37,11 +37,11 @@
 //// ```
 
 import gleam/option.{None}
-import gleam_toon/encode/arrays
-import gleam_toon/encode/objects
-import gleam_toon/encode/primitives
-import gleam_toon/encode/writer
-import gleam_toon/types.{
+import toon_codec/encode/arrays
+import toon_codec/encode/objects
+import toon_codec/encode/primitives
+import toon_codec/encode/writer
+import toon_codec/types.{
   type EncodeOptions, type JsonValue, Array, Bool, Null, Number, Object,
   String as JsonString,
 }

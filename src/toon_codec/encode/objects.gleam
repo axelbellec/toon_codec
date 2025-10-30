@@ -24,10 +24,10 @@
 
 import gleam/list
 import gleam/option.{Some}
-import gleam_toon/encode/arrays
-import gleam_toon/encode/primitives
-import gleam_toon/encode/writer.{type Writer}
-import gleam_toon/types.{type EncodeOptions, type JsonValue, Array, Object}
+import toon_codec/encode/arrays
+import toon_codec/encode/primitives
+import toon_codec/encode/writer.{type Writer}
+import toon_codec/types.{type EncodeOptions, type JsonValue, Array, Object}
 
 // Object encoding
 
